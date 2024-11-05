@@ -24,23 +24,22 @@ class _MainScreenState extends State<MainScreen> {
         padding: const EdgeInsets.all(8.0),
         child: Center(
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const TextField(
-                decoration: InputDecoration(
+              TextField(
+                controller: _zipController,
+                decoration: const InputDecoration(
                     border: OutlineInputBorder(), labelText: "Postleitzahl"),
               ),
               const SizedBox(height: 32),
               OutlinedButton(
                 onPressed: () {
                   setState(() {
-                    _cityFuture = getCityFromZip(_zipController.text);
+                    _cityFuture = getCityFromZip(_zipController.text.trim());
                   });
                 },
                 child: const Text("Suche"),
               ),
-              const SizedBox(height: 32),
-              Text("Ergebnis: Noch keine PLZ gesucht",
-                  style: Theme.of(context).textTheme.labelLarge),
               const SizedBox(height: 32),
               FutureBuilder<String?>(
                   future: _cityFuture,
@@ -70,6 +69,7 @@ class _MainScreenState extends State<MainScreen> {
 
   Future<String> getCityFromZip(String zip) async {
     // simuliere Dauer der Datenbank-Anfrage
+    print(zip);
     await Future.delayed(const Duration(seconds: 3));
 
     switch (zip) {
