@@ -8,6 +8,7 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
+  TextEditingController _zipController = TextEditingController();
   @override
   void initState() {
     super.initState();
