@@ -9,6 +9,8 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   TextEditingController _zipController = TextEditingController();
+  Future<String?>? _cityFuture;
+
   @override
   void initState() {
     super.initState();
