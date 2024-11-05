@@ -32,7 +32,9 @@ class _MainScreenState extends State<MainScreen> {
               const SizedBox(height: 32),
               OutlinedButton(
                 onPressed: () {
-                  // TODO: implementiere Suche
+                  setState(() {
+                    _cityFuture = getCityFromZip(_zipController.text);
+                  });
                 },
                 child: const Text("Suche"),
               ),
