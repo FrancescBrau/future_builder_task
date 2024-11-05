@@ -41,6 +41,20 @@ class _MainScreenState extends State<MainScreen> {
               const SizedBox(height: 32),
               Text("Ergebnis: Noch keine PLZ gesucht",
                   style: Theme.of(context).textTheme.labelLarge),
+              const SizedBox(height: 32),
+              FutureBuilder<String?>(
+                  future: _cityFuture,
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const CircularProgressIndicator();
+                    } else if (snapshot.hasError) {
+                      return const Text('Fehler bei der Suche');
+                    } else if (snapshot.hasData) {
+                      return Text('Ergebnis: ${snapshot.data}');
+                    } else {
+                      return const Text('Ergenbis: Noch keine PLZ gesucht');
+                    }
+                  })
             ],
           ),
         ),
@@ -50,7 +64,7 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   void dispose() {
-    // TODO: dispose controllers
+    _zipController.dispose();
     super.dispose();
   }
 
